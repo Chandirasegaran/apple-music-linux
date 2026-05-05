@@ -20,6 +20,16 @@ This open source wrapper offers a smoother Linux experience than using the brows
 - Media control support (play/pause, next, previous)
 - Package output for `.deb`, `.AppImage`, and `.tar.gz`
 
+## Screenshots
+
+### Home Screen
+
+![Apple Music Linux Home](imgs/screen1.png)
+
+### Playlist View
+
+![Apple Music Linux Playlist](imgs/screen2.png)
+
 ## Tech Stack
 
 - Electron
