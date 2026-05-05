@@ -1,0 +1,66 @@
+{
+  "name": "applemusic",
+  "version": "1.0.0",
+  "description": "Apple Music Linux desktop wrapper with persistent sessions",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build && electron .",
+    "pack": "npm run build && electron-builder --dir",
+    "pack:drm": "npm run build && ELECTRON_MIRROR=https://github.com/castlabs/electron-releases/releases/download/ ELECTRON_CUSTOM_DIR='v41.0.0-beta.7+wvcus' electron-builder --dir",
+    "dist": "npm run build && electron-builder -l deb AppImage tar.gz",
+    "dist:drm": "npm run build && ELECTRON_MIRROR=https://github.com/castlabs/electron-releases/releases/download/ ELECTRON_CUSTOM_DIR='v41.0.0-beta.7+wvcus' electron-builder -l deb AppImage tar.gz"
+  },
+  "keywords": [
+    "apple-music",
+    "electron",
+    "linux"
+  ],
+  "author": {
+    "name": "Chandirasegaran",
+    "email": "chandirasegaransegar@gmail.com"
+  },
+  "homepage": "https://music.apple.com",
+  "license": "MIT",
+  "type": "commonjs",
+  "build": {
+    "appId": "com.segar.applemusic",
+    "productName": "Apple Music",
+    "npmRebuild": false,
+    "directories": {
+      "buildResources": "build",
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "build/offline.html",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "deb",
+        "AppImage",
+        "tar.gz"
+      ],
+      "category": "AudioVideo",
+      "executableName": "AppleMusic",
+      "maintainer": "Chandirasegaran <chandirasegaransegar@gmail.com>",
+      "icon": "build/icons",
+      "desktop": {
+        "entry": {
+          "Name": "Apple Music",
+          "Comment": "Apple Music web desktop wrapper",
+          "StartupWMClass": "AppleMusic",
+          "Icon": "AppleMusic",
+          "Categories": "AudioVideo;Audio;Player;"
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^25.6.0",
+    "electron": "github:castlabs/electron-releases#v41.0.0-beta.7+wvcus",
+    "electron-builder": "^26.8.1",
+    "typescript": "^6.0.3"
+  }
+}

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apple Music - Offline</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --bg: #111214;
+        --panel: #1a1b1f;
+        --panel-border: rgba(255, 255, 255, 0.08);
+        --muted: #9ea3ad;
+        --text: #f5f5f7;
+        --accent: #fa2d48;
+        --accent-hover: #ff3f59;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        min-height: 100svh;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        background:
+          radial-gradient(1200px 600px at 90% -10%, rgba(250, 45, 72, 0.14), transparent 60%),
+          linear-gradient(180deg, #15161a 0%, var(--bg) 100%);
+        color: var(--text);
+        font-family: "SF Pro Display", "SF Pro Text", Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      }
+      .sidebar {
+        border-right: 1px solid var(--panel-border);
+        background: rgba(255, 255, 255, 0.02);
+        padding: 24px 14px;
+      }
+      .logo {
+        font-size: 30px;
+        margin-bottom: 18px;
+        opacity: 0.95;
+      }
+      .brand {
+        font-size: 30px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin: 0 0 18px;
+      }
+      .navHint {
+        color: var(--muted);
+        font-size: 13px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 10px 12px;
+      }
+      .card {
+        align-self: center;
+        justify-self: center;
+        width: min(640px, calc(100vw - 300px));
+        padding: 34px;
+        border-radius: 16px;
+        background: linear-gradient(180deg, rgba(36, 37, 42, 0.9), rgba(23, 24, 29, 0.9));
+        border: 1px solid var(--panel-border);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.42);
+        backdrop-filter: blur(8px);
+      }
+      h1 {
+        margin: 0 0 12px;
+        font-size: 34px;
+        line-height: 1.1;
+        letter-spacing: -0.02em;
+        font-weight: 760;
+      }
+      p {
+        margin: 0 0 24px;
+        max-width: 460px;
+        line-height: 1.5;
+        color: var(--muted);
+        font-size: 15px;
+      }
+      button {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        border: 0;
+        border-radius: 999px;
+        padding: 11px 18px;
+        background: var(--accent);
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 120ms ease;
+      }
+      button:hover {
+        background: var(--accent-hover);
+      }
+      button:active {
+        transform: translateY(1px);
+      }
+      .icon {
+        width: 18px;
+        height: 18px;
+      }
+      @media (max-width: 820px) {
+        body {
+          grid-template-columns: 1fr;
+        }
+        .sidebar {
+          display: none;
+        }
+        .card {
+          width: min(92vw, 620px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <aside class="sidebar" aria-hidden="true">
+      <div class="logo"></div>
+      <h2 class="brand">Music</h2>
+      <div class="navHint">Reconnect to continue listening.</div>
+    </aside>
+    <main class="card">
+      <h1>No Internet Connection</h1>
+      <p>Apple Music could not be reached. Check your network and try again.</p>
+      <button id="retryButton" type="button" aria-label="Refresh and retry">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M21 12a9 9 0 1 1-2.64-6.36" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+          <path d="M21 3v6h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Refresh
+      </button>
+    </main>
+    <script>
+      const button = document.getElementById("retryButton");
+      button?.addEventListener("click", () => {
+        if (window.appleMusicDesktop?.retryLoad) {
+          window.appleMusicDesktop.retryLoad();
+        } else {
+          location.reload();
+        }
+      });
+    </script>
+  </body>
+</html>
